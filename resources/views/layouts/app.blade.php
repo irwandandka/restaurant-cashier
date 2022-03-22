@@ -7,9 +7,9 @@
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+  {{-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"> --}}
   <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -26,18 +26,16 @@
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-          <div class="section-header">
-            <h1>Blank Page</h1>
-          </div>
-
+          @yield('header')
           <div class="section-body">
               @yield('content')
           </div>
         </section>
+        @yield('modal')
       </div>
       <footer class="main-footer">
         <div class="footer-left">
-          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+          Copyright &copy; 2022 <div class="bullet"></div> Made By ❤ <a href="#">Irwanda Andika Putra</a>
         </div>
         <div class="footer-right">
           2.3.0
@@ -55,6 +53,7 @@
   <script src="{{ asset('assets/js/stisla.js') }}"></script>
 
   <!-- JS Libraies -->
+  {{-- <script src="{{ asset('assets/fontawesome/js/all.min.js') }}"></script> --}}
 
   <!-- Template JS File -->
   <script src="{{ asset('assets/js/scripts.js') }}"></script>

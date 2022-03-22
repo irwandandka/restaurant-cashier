@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CashierController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FoodController;
 use App\Http\Controllers\OwnerController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +30,8 @@ Route::middleware(['auth'])->group(function() {
     Route::middleware('checkRole:cashier')->prefix('cashier')->group(function() {
         Route::get('/dashboard', [CashierController::class, 'index'])->name('cashier.dashboard');
     });
+
+    Route::resource('category', CategoryController::class);
+    Route::resource('food', FoodController::class);
 });
 

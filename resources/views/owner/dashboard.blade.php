@@ -1,5 +1,17 @@
 @extends('layouts.app')
 @section('title', 'Owner Dashboard')
+@section('header')
+<div class="section-header">
+    <h1>Dashboard</h1>
+    <div class="section-header-breadcrumb">
+      @if(Auth::user()->role === 'owner') 
+      <div class="breadcrumb-item active"><a href="{{ route('owner.dashboard') }}">Dashboard</a></div>
+      @else
+      <div class="breadcrumb-item active"><a href="{{ route('cashier.dashboard') }}">Dashboard</a></div>
+      @endif
+    </div>
+</div>
+@endsection
 @section('content')
     @if (session('message'))
     <div class="row">
