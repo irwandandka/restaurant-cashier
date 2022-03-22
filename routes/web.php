@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CashierController;
+use App\Http\Controllers\OwnerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [AuthController::class, 'index'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('post-login');
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware(['auth'])->group(function() {
+    Route::middleware('checkRole:owner')->prefix('owner')->group(function() {
+        Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
+    });
+
+    Route::middleware('checkRole:cashier')->prefix('cashier')->group(function() {
+        Route::get('/dashboard', [CashierController::class, 'index'])->name('cashier.dashboard');
+    });
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
+
