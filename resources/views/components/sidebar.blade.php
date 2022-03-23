@@ -22,6 +22,9 @@
           <li class="nav-item {{ request()->routeIs('food.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('food.index') }}"><i class="fa-solid fa-burger"></i><span>Makanan</span></a>
           </li>
+          <li class="nav-item {{ request()->routeIs('setting.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('setting.index') }}"><i class="fa-solid fa-gear"></i><span>Setting</span></a>
+          </li>
         </ul>
     </aside>
   </div>
