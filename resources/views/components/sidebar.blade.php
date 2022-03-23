@@ -25,6 +25,15 @@
           <li class="nav-item {{ request()->routeIs('setting.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('setting.index') }}"><i class="fa-solid fa-gear"></i><span>Setting</span></a>
           </li>
+          <li class="nav-item {{ request()->routeIs('table.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('table.index') }}"><i class="fa-solid fa-table"></i><span>Meja</span></a>
+          </li>
+          <li class="nav-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i><span>User</span></a>
+          </li>
+          <li class="nav-item {{ request()->routeIs('order.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-utensils"></i>Order Makanan</span></a>
+          </li>
         </ul>
     </aside>
   </div>

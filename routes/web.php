@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{AuthController, CashierController, CategoryController, FoodController, OwnerController, SettingController, TableController};
+use App\Http\Controllers\{AuthController, CashierController, CategoryController, FoodController, OrderController, OwnerController, SettingController, TableController, UserController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,5 +30,7 @@ Route::middleware(['auth'])->group(function() {
     Route::resource('food', FoodController::class);
     Route::resource('setting', SettingController::class);
     Route::resource('table', TableController::class);
+    Route::resource('user', UserController::class);
+    Route::resource('order', OrderController::class);
 });
 
