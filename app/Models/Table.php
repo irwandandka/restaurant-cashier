@@ -11,4 +11,8 @@ class Table extends Model
 
     protected $fillable = ['table_number','total_chair','status'];
     
+    public function orders()
+    {
+        return $this->hasMany(Order::class);    
+    }
 }

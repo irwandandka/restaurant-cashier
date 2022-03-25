@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('table_number');
             $table->integer('total_chair');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

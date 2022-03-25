@@ -40,6 +40,7 @@ class TableController extends Controller
             'total_chair' => 'required|numeric',
         ]);
 
+        $validateData['status'] = 1;
         Table::create($validateData);
         return redirect()->route('table.index')->with('message','Berhasil Tambah Data Meja');
     }
@@ -78,6 +79,7 @@ class TableController extends Controller
         $validateData = $request->validate([
             'table_number' => 'required',
             'total_chair' => 'required|numeric',
+            'status' => 'required',
         ]);
 
         $table->update($validateData);

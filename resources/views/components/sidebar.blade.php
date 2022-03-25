@@ -22,17 +22,23 @@
           <li class="nav-item {{ request()->routeIs('food.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('food.index') }}"><i class="fa-solid fa-burger"></i><span>Makanan</span></a>
           </li>
-          <li class="nav-item {{ request()->routeIs('setting.index') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('setting.index') }}"><i class="fa-solid fa-gear"></i><span>Setting</span></a>
-          </li>
           <li class="nav-item {{ request()->routeIs('table.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('table.index') }}"><i class="fa-solid fa-table"></i><span>Meja</span></a>
+          </li>
+          @if (Auth::user()->role === 'owner')
+          <li class="nav-item {{ request()->routeIs('setting.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('setting.index') }}"><i class="fa-solid fa-gear"></i><span>Setting</span></a>
           </li>
           <li class="nav-item {{ request()->routeIs('user.index') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('user.index') }}"><i class="fa-solid fa-user"></i><span>User</span></a>
           </li>
-          <li class="nav-item {{ request()->routeIs('order.index') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('order.index') }}"><i class="fa-solid fa-utensils"></i>Order Makanan</span></a>
+          @else
+          <li class="nav-item {{ request()->routeIs('order') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('order') }}"><i class="fa-solid fa-utensils"></i>Order Makanan</span></a>
+          </li>
+          @endif
+          <li class="nav-item {{ request()->routeIs('transaction.index') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('transaction.index') }}"><i class="fa-solid fa-utensils"></i>Transaksi</span></a>
           </li>
         </ul>
     </aside>

@@ -15,16 +15,18 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 overflow-auto">
         <div class="row">
             @foreach ($foods as $food)
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="card">
                         <img src="{{ asset('storage/foods/' . $food->image) }}" class="card-img-top" style="width: 100%; height: 180px">
                         <div class="card-body">
-                          <h5 class="card-title">{{ $food->name }}</h5>
-                          <p class="card-text">Rp {{ number_format($food->price) }}</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">{{ $food->name }}</h5>
+                        <p class="card-text" id="price">Rp {{ number_format($food->price) }}</p>
+                        <input type="hidden" id="price-{{ $food->id }}" value="{{ $food->price }}">
+                        <input type="hidden" id="name-{{ $food->id }}" value="{{ $food->name }}">
+                        <button type="button" id="tambah" onclick="tambah({{ $food->id }})" class="btn btn-primary">Tambah</button>
                         </div>
                     </div>
                 </div>
@@ -46,7 +48,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="description" class="form-label font-weight-bold">Deskripsi Pesanan</label>
-                            <input type="number" name="description" id="description" value="{{ old('description') }}" class="form-control @error('description') is-invalid @enderror">
+                            <input type="text" name="description" id="description" value="{{ old('description') }}" class="form-control @error('description') is-invalid @enderror">
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -64,6 +66,10 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
+                            <label for="total_price" class="form-label font-weight-bold">Total Harga</label>
+                            <input type="number" name="total_price" id="total_price" class="form-control">
+                        </div>
+                        <div class="form-group mb-3">
                             <button type="submit" class="btn btn-primary float-right">Simpan</button>
                         </div>
                     </form>
@@ -73,3 +79,19 @@
     </div>
 </div>
 @endsection
+@push('script')
+    <script>
+        const btnTambah = document.querySelector("#tambah");
+        let totalPrice = 0;
+        let quantity = 0;
+
+        function tambah(id) {
+            let priceId = "#price-" + id;
+            let nameId = "#name-" + id;
+            let price = document.querySelector(priceId);
+            let name = document.querySelector(nameId);
+            totalPrice += parseInt(price.value);
+            document.querySelector("#total_price").value = totalPrice;
+        }
+    </script>
+@endpush

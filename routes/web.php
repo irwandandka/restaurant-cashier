@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\{AuthController, CashierController, CategoryController, FoodController, OrderController, OwnerController, SettingController, TableController, UserController};
+use App\Http\Controllers\{AuthController, CashierController, CategoryController, FoodController, OwnerController, SettingController, TableController, TransactionController, UserController};
+use App\Http\Livewire\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,8 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->group(function() {
     Route::middleware('checkRole:owner')->prefix('owner')->group(function() {
         Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
+        Route::resource('user', UserController::class);
+        Route::resource('setting', SettingController::class);
     });
 
     Route::middleware('checkRole:cashier')->prefix('cashier')->group(function() {
@@ -28,9 +31,9 @@ Route::middleware(['auth'])->group(function() {
 
     Route::resource('category', CategoryController::class);
     Route::resource('food', FoodController::class);
-    Route::resource('setting', SettingController::class);
     Route::resource('table', TableController::class);
-    Route::resource('user', UserController::class);
-    Route::resource('order', OrderController::class);
+    Route::get('order', Order::class)->name('order');
+    Route::get('transaction', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::delete('transaction/{order}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
 });
 

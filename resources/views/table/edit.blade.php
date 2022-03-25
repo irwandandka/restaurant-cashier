@@ -23,6 +23,17 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
+                        <label for="status" class="form-label font-weight-bold">Status</label>
+                        <select name="status" class="form-control" id="status">
+                            <option value="" selected>Pilih Status</option>
+                            <option value="1" {{ $table->status == 1 ? 'selected' : '' }}>Kosong</option>
+                            <option value="0" {{ $table->status == 0 ? 'selected' : '' }}>Penuh</option>
+                        </select>
+                        @error('total_chair')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group mb-3">
                         <button type="submit" class="btn btn-primary float-right">Update</button>
                     </div>
                 </form>

@@ -1,15 +1,15 @@
 @extends('layouts.app')
-@section('title', 'Users')
+@section('title', 'Transaksi')
 @section('header')
 <div class="section-header">
-    <h1>User</h1>
+    <h1>Transaksi</h1>
     <div class="section-header-breadcrumb">
       @if(Auth::user()->role === 'owner') 
       <div class="breadcrumb-item active"><a href="{{ route('owner.dashboard') }}">Dashboard</a></div>
       @else
       <div class="breadcrumb-item active"><a href="{{ route('cashier.dashboard') }}">Dashboard</a></div>
       @endif
-      <div class="breadcrumb-item"><a href="{{ route('user.index') }}">Users</a></div>
+      <div class="breadcrumb-item"><a href="{{ route('transaction.index') }}">Transaksi</a></div>
     </div>
 </div>
 @endsection
@@ -27,33 +27,35 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header font-weight-bold">Users</div>
+                    <div class="card-header font-weight-bold">Transaksi</div>
                     <div class="card-body">
-                        <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah User</a>
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered text-center">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nama</th>
-                                        <th>Email</th>
-                                        <th>Role</th>
+                                        <th>Nama Pelanggan</th>
+                                        <th>Total Harga</th>
+                                        <th>Nomor Meja</th>
+                                        <th>Tanggal</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $no => $user)
+                                    @foreach ($transactions as $no => $transaction)
                                         <tr>
                                             <td>{{ $no + 1 }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->role === 'owner' ? 'Owner' : 'Kasir' }}</td>
+                                            <td>{{ $transaction->customer_name }}</td>
+                                            <td>{{ $transaction->total_price }}</td>
+                                            <td>{{ $transaction->table->table_number }}</td>
+                                            <td>{{ $transaction->created_at->diffForHumans() }}</td>
                                             <td>
-                                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-outline-success"><i class="fas fa-pen"></i></a>
-                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteUser-{{ $user->id }}">
+                                                <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteTransaction-{{ $transaction->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                                  
+                                                {{-- <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#deleteTransaction-{{ $transaction->id }}">
+                                                    <i class="fas fa-print"></i>
+                                                </button> --}}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -67,21 +69,21 @@
     </div>
 @endsection
 @section('modal')
-@foreach ($users as $u)
-<div class="modal fade" id="deleteUser-{{ $u->id }}" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+@foreach ($transactions as $t)
+<div class="modal fade" id="deleteTransaction-{{ $t->id }}" tabindex="-1" aria-labelledby="deleteTransactionLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteUserModal">Hapus Meja</h5>
+          <h5 class="modal-title" id="deleteTransactionModal">Hapus Transaksi</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-            <form action="{{ route('user.destroy', $u->id) }}" method="post">
+            <form action="{{ route('transaction.destroy', $t->id) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <p class="text-center">Anda yakin ingin menghapus User {{ $u->name }}?</p>
+                <p class="text-center">Anda yakin ingin menghapus Transaksi ini?</p>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

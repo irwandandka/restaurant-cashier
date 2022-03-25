@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Food;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Table;
 use Illuminate\Http\Request;
 
@@ -29,7 +31,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -40,7 +42,23 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Order::create([
+            'customer_name' => $request->customer_name,
+            'description' => $request->description,
+            'total_price' => $request->total_price,
+            'table_id' => $request->table_id,
+        ]);
+
+        foreach($request->foods as $food) {
+            OrderDetail::create([
+                'total' => $food->total,
+                'quantity' => $food->quantity,
+                'order_id' => $food->order_id,
+                'food_id' => $food->food_id,
+            ]);
+        }
+
+        return to_route('order.index');
     }
 
     /**

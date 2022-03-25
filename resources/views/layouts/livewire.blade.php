@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>@yield('title') | CashierIO</title>
+  <title>Order Makanan | CashierIO</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -14,6 +14,7 @@
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+  @livewireStyles
 </head>
 
 <body>
@@ -26,9 +27,19 @@
       <!-- Main Content -->
       <div class="main-content">
         <section class="section">
-          @yield('header')
+            <div class="section-header">
+                <h1>Order Makanan</h1>
+                <div class="section-header-breadcrumb">
+                  @if(Auth::user()->role === 'owner') 
+                  <div class="breadcrumb-item active"><a href="{{ route('owner.dashboard') }}">Dashboard</a></div>
+                  @else
+                  <div class="breadcrumb-item active"><a href="{{ route('cashier.dashboard') }}">Dashboard</a></div>
+                  @endif
+                  <div class="breadcrumb-item"><a href="{{ route('order') }}">Order Makanan</a></div>
+                </div>
+            </div>
           <div class="section-body">
-              @yield('content')
+              {{ $slot }}
           </div>
         </section>
         @yield('modal')
@@ -56,6 +67,7 @@
   {{-- <script src="{{ asset('assets/fontawesome/js/all.min.js') }}"></script> --}}
 
   <!-- Template JS File -->
+  @livewireScripts
   <script src="{{ asset('assets/js/scripts.js') }}"></script>
   <script src="{{ asset('assets/js/custom.js') }}"></script>
   @stack('script')

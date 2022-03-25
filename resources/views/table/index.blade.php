@@ -47,7 +47,7 @@
                                             <td>{{ $no + 1 }}</td>
                                             <td>{{ $table->table_number }}</td>
                                             <td>{{ $table->total_chair }}</td>
-                                            <td>{{ $table->status === false ? 'Kosong' : 'Penuh' }}</td>
+                                            <td>{{ $table->status === 1 ? 'Kosong' : 'Penuh' }}</td>
                                             <td>
                                                 <a href="{{ route('table.edit', $table->id) }}" class="btn btn-outline-success"><i class="fas fa-pen"></i></a>
                                                 {{-- <a href="" class="btn btn-outline-danger"><i class="fas fa-trash"></i></a> --}}
