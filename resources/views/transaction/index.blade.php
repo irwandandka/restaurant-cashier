@@ -53,9 +53,7 @@
                                                 <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#deleteTransaction-{{ $transaction->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
-                                                {{-- <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#deleteTransaction-{{ $transaction->id }}">
-                                                    <i class="fas fa-print"></i>
-                                                </button> --}}
+                                                <a href="{{ route('transaction.print', $transaction->id) }}" class="btn btn-outline-info"><i class="fas fa-print"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

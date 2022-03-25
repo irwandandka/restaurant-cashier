@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -20,5 +21,13 @@ class TransactionController extends Controller
         OrderDetail::where('order_id', $order->id)->delete();
         $order->delete();  
         return to_route('transaction.index')->with('message','Berhasil Hapus Data Transaksi');     
+    }
+
+    public function print(Order $order) 
+    {
+        return view('transaction.print', [
+            'order' => $order,
+            'setting' => Setting::first(),
+        ]);
     }
 }

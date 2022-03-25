@@ -35,5 +35,6 @@ Route::middleware(['auth'])->group(function() {
     Route::get('order', Order::class)->name('order');
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction.index');
     Route::delete('transaction/{order}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
+    Route::get('transaction/{order}/print', [TransactionController::class, 'print'])->name('transaction.print');
 });
 
